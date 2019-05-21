@@ -27,7 +27,7 @@ private:
 
 public:
 	Monster() : stats{0} {
-		name = "_"; type = "N/A";
+		name = "N/A"; type = "N/A";
 		lvl = 0;
 		currHP = 0; maxHP = 0;
 		acc = 0; eva = 0;
@@ -73,8 +73,8 @@ public:
 	// 	target.take_damage(this, dmg);
 	// }
 	void die(PartyMember slayer);
-	void take_damage(PartyMember slayer, uint dmg);
-	void attack(PartyMember target);
+	void take_damage(PartyMember& slayer, uint dmg);
+	void attack(PartyMember& target);
 
 	void printInfo(){
 		cout<<"Monster Info\n";

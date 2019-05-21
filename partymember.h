@@ -31,7 +31,7 @@ private:
 
 public:
 	PartyMember() : stats{0} {
-		name = "_"; job = "None"; lvl = 0;
+		name = "N/A"; job = "N/A"; lvl = 0;
 		currEXP = 0; neededEXP = 0;
 		currHP = 0; maxHP = 0;
 		//stats = uint[6]{0}; //str, dex, int, luk, def, mdef
@@ -76,8 +76,8 @@ public:
 	// 	target.take_damage(this, dmg);
 	// }
 	void die(Monster attacker);
-	void take_damage(Monster attacker, uint dmg);
-	void attack(Monster target);
+	void take_damage(Monster& attacker, uint dmg);
+	void attack(Monster& target);
 
 
 	bool bonus(string enhance){

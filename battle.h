@@ -16,7 +16,7 @@ void PartyMember::die(Monster attacker){
 
 	cout<< this->name <<" has been slain by "<< attacker.getName() <<"!\n";
 }
-void PartyMember::take_damage(Monster attacker, uint dmg){
+void PartyMember::take_damage(Monster& attacker, uint dmg){
 	cout<<"\n"<< this->name <<" was attacked by " << attacker.getName() <<"!\n";
 	uint dmg_dealt = dmg;
 	/* WIP: damage calculation */
@@ -25,7 +25,7 @@ void PartyMember::take_damage(Monster attacker, uint dmg){
 	this->die(attacker);
 }
 
-void PartyMember::attack(Monster target){
+void PartyMember::attack(Monster& target){
 	uint dmg = 100;
 	/* WIP: damage calculation */
 	target.take_damage(this, dmg);
@@ -41,7 +41,7 @@ void Monster::die(PartyMember slayer){
 	cout<< slayer.getName() <<" gets "<< givenEXP <<" EXP.\n";
 	slayer.gainEXP(givenEXP);
 }
-void Monster::take_damage(PartyMember slayer, uint dmg){
+void Monster::take_damage(PartyMember& slayer, uint dmg){
 	cout<<"\n"<< this->name <<" was attacked by " << slayer.getName() <<"!\n";
 	uint dmg_dealt = dmg;
 	/* WIP: damage calculation */
@@ -50,8 +50,8 @@ void Monster::take_damage(PartyMember slayer, uint dmg){
 	this->die(slayer);
 }
 
-void Monster::attack(PartyMember target){
-	uint dmg = 0;
+void Monster::attack(PartyMember& target){
+	uint dmg = 100;
 	/* WIP: damage calulation */
 	target.take_damage(this, dmg);
 }
