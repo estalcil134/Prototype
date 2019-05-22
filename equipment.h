@@ -13,24 +13,50 @@ private:
 	string name;
 	int req_lvl;
 	string slot;
-	string type;
+
+	int bonus_HP;
+	int bonus_stats[6];
+	//atk, matk, str, dex, int, luk
+	int bonus_acc;
+	int bonus_eva;
 public:
-	Equipment(){
-		name = "None"; req_lvl = 0; slot = "None"; type = "None";
+	Equipment() : bonus_stats{0,0,0,0,0,0}{
+		name = "None"; req_lvl = 0; slot = "None";
+		bonus_HP = 0; bonus_acc = 0; bonus_eva = 0;
 	}
-	Equipment(string _name){
-		name = _name; req_lvl = 0; slot = "None"; type = "None";
+	Equipment(string _name) : bonus_stats{0,0,0,0,0,0}{
+		name = _name; req_lvl = 0; slot = "None";
+		bonus_HP = 0; bonus_acc = 0; bonus_eva = 0;
+	}
+
+	Equipment(string _name, string _slot, uint reqlvl, int bHP, 
+		int atk, int matk, int str, int dex, int int_, int luk, 
+		int b_acc, int b_eva) : 
+		bonus_stats{ atk, matk, str, dex, int_, luk } {
+			name = _name;
+			req_lvl = reqlvl;
+			slot = _slot;
+			bonus_HP = bHP;
+			bonus_acc = b_acc;
+			bonus_eva = b_eva;
 	}
 
 	string getName(){return name; }
-	int getLevel(){return req_lvl; }
-	string getSlot(){return slot; }
-	string getType(){return type; } 
+	uint getLevel(){return req_lvl; }
+	string getSlot(){return slot; } 
 
-
-	void setName(string _name){name = _name; }
-	void setSlot(string _slot){slot = _slot; }
-	void setType(string _type){type = _type; }
+	int getHP(){return bonus_HP; }
+	int getStat(uint choose){
+		if(choose == 0){return bonus_stats[0]; }
+		else if(choose == 1){return bonus_stats[1]; }
+		else if(choose == 2){return bonus_stats[2]; }
+		else if(choose == 3){return bonus_stats[3]; }
+		else if(choose == 4){return bonus_stats[4]; }
+		else if(choose == 5){return bonus_stats[5]; }
+		else{return 0; }
+	}
+	int getAcc(){return bonus_acc; }
+	int getEva(){return bonus_eva; }
 
 	void print(){
 		cout<<"Equipment Info\n";
@@ -39,14 +65,25 @@ public:
 		cout<<"Equipment Slot: "<< this->slot <<"\n";
 	}
 	
-	int getHP(){return 0; }
-	int getStat(uint choose){return 0; }
-	int getAcc(){return 0; }
-	int getEva(){return 0; }
-	void printMore(){cout<<"should not be printed\n"; }
+	void printMore(){
+		cout<<"Equipment Info\n";
+		cout<<"Name:           "<< this->getName() <<"\n";
+		cout<<"Required Level: "<< this->getLevel() <<"\n";
+		cout<<"Equipment Slot: "<< this->getSlot() <<"\n";
+		cout<<"Bonus Stats\n";
+		cout<<left<<"Bonus HP:   "<<setw(3)<< bonus_HP <<"\n";
+		cout<<left<<"Bonus ATK:  "<<setw(3)<< bonus_stats[0] <<"\n";
+		cout<<left<<"Bonus MATK: "<<setw(3)<< bonus_stats[1] <<"\n";
+		cout<<left<<"Bonus STR:  "<<setw(3)<< bonus_stats[2] <<"\n";
+		cout<<left<<"Bonus DEX:  "<<setw(3)<< bonus_stats[3] <<"\n";
+		cout<<left<<"Bonus INT:  "<<setw(3)<< bonus_stats[4] <<"\n";
+		cout<<left<<"Bonus LUK:  "<<setw(3)<< bonus_stats[5] <<"\n";
+		cout<<left<<"Bonus ACC:  "<<setw(3)<< bonus_acc <<"\n";
+		cout<<left<<"Bonus EVA:  "<<setw(3)<< bonus_eva <<"\n";
+	}
 
 };
-
+/*
 class Headgear : public Equipment{
 private:
 	int bonus_HP;
@@ -288,4 +325,4 @@ public:
 	int getAcc(){return bonus_acc; }
 	int getEva(){return bonus_eva; }
 };
-
+*/

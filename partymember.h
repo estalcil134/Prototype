@@ -153,6 +153,8 @@ public:
 	}
 
 	void equip(Equipment gear){
+		if(gear.getLevel() > this->lvl){return; }
+
 		if(gear.getSlot() == "Headgear"){ equipped[0] = gear; }
 		else if(gear.getSlot() == "Upper Body"){ equipped[1] = gear; }
 		else if(gear.getSlot() == "Lower Body"){ equipped[2] = gear; }
