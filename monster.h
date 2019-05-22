@@ -73,7 +73,7 @@ public:
 	// 	target.take_damage(this, dmg);
 	// }
 	void die(PartyMember& slayer);
-	void take_damage(PartyMember& slayer, uint dmg);
+	void take_damage(PartyMember& slayer, uint dmg, string dmg_type);
 	void attack(PartyMember& target);
 
 	void printInfo(){

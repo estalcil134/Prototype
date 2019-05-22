@@ -7,6 +7,8 @@
 #include <time.h>
 
 #include "equipment.h"
+#include "ability.h"
+#include "item.h"
 
 using namespace std;
 
@@ -23,6 +25,7 @@ private:
 
 	int currHP;
 	uint maxHP;
+	uint shield;
 	uint stats[6];
 
 	uint acc;
@@ -31,17 +34,21 @@ private:
 	Equipment equipped[6];
 	//head, top, bottom, shoes, main hand, sub hand
 
+	vector<Ability> abilities;
+
 public:
 	PartyMember() : stats{0} {
 		name = "N/A"; job = "N/A"; lvl = 0;
 		currEXP = 0; neededEXP = 0;
-		currHP = 0; maxHP = 0;
+		currHP = 0; maxHP = 0; shield = 0; 
 		//stats = uint[6]{0}; //str, dex, int, luk, def, mdef
 		acc = 0; eva = 0;
 		for(int i = 0; i < 6; i++){
 			Equipment tmp = Equipment();
 			equipped[i] = tmp;
 		}
+		Ability none = Ability();
+		abilities.push_back(none);
 	}
 	PartyMember(string _name, string _job) : stats{4,4,4,4,4,4} {
 		name = _name;
@@ -49,13 +56,15 @@ public:
 
 		lvl = 1;
 		currEXP = 0; neededEXP = 25;
-		currHP = 15; maxHP = 15;
+		currHP = 15; maxHP = 15; shield = 0;
 		//stats = uint[6]{0};
 		acc = 10; eva = 1;
 		for(int i = 0; i < 6; i++){
 			Equipment tmp = Equipment();
 			equipped[i] = tmp;
 		}
+		Ability none = Ability();
+		abilities.push_back(none);
 	}
 
 	string getName(){ return this->name; }
@@ -86,7 +95,7 @@ public:
 	// 	target.take_damage(this, dmg);
 	// }
 	void die(Monster& attacker);
-	void take_damage(Monster& attacker, uint dmg);
+	void take_damage(Monster& attacker, uint dmg, string dmg_type);
 	void attack(Monster& target);
 
 
@@ -241,4 +250,13 @@ public:
 	}
 
 	uint size(){return members.size(); }
+
+	void printParty(){
+		//prints out an overview of the party members
+		cout<<"Party Members\n";
+	}
+	void printPartyBattle(int member1 = 0, int member2 = -1, int member3 = -1){
+		//prints out the active members in battle
+		cout<<" \n";
+	}
 };
