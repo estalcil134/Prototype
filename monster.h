@@ -17,7 +17,7 @@ private:
 	string type;
 
 	uint lvl;
-	uint currHP;
+	int currHP;
 	uint maxHP;
 
 	uint stats[4]; //atk, matk, def, mdef
@@ -32,7 +32,7 @@ public:
 		currHP = 0; maxHP = 0;
 		acc = 0; eva = 0;
 	}
-	Monster(string _name, string _type) : stats{4} {
+	Monster(string _name, string _type) : stats{4,4,4,4} {
 		name = _name; 
 		type = _type;
 		lvl = 1;
@@ -72,7 +72,7 @@ public:
 	// 	/* WIP: damage calulation */
 	// 	target.take_damage(this, dmg);
 	// }
-	void die(PartyMember slayer);
+	void die(PartyMember& slayer);
 	void take_damage(PartyMember& slayer, uint dmg);
 	void attack(PartyMember& target);
 

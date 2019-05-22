@@ -6,6 +6,7 @@
 #include <cmath>
 #include <time.h>
 
+#include "equipment.h"
 
 using namespace std;
 
@@ -20,14 +21,15 @@ private:
 	uint currEXP;
 	uint neededEXP;
 
-	uint currHP;
+	int currHP;
 	uint maxHP;
 	uint stats[6];
 
 	uint acc;
 	uint eva;
 
-
+	Equipment equipped[6];
+	//head, top, bottom, shoes, main hand, sub hand
 
 public:
 	PartyMember() : stats{0} {
@@ -36,8 +38,12 @@ public:
 		currHP = 0; maxHP = 0;
 		//stats = uint[6]{0}; //str, dex, int, luk, def, mdef
 		acc = 0; eva = 0;
+		for(int i = 0; i < 6; i++){
+			Equipment tmp = Equipment();
+			equipped[i] = tmp;
+		}
 	}
-	PartyMember(string _name, string _job) : stats{4} {
+	PartyMember(string _name, string _job) : stats{4,4,4,4,4,4} {
 		name = _name;
 		job = _job; 
 
@@ -45,7 +51,11 @@ public:
 		currEXP = 0; neededEXP = 25;
 		currHP = 15; maxHP = 15;
 		//stats = uint[6]{0};
-		acc = 10; eva = 10;
+		acc = 10; eva = 1;
+		for(int i = 0; i < 6; i++){
+			Equipment tmp = Equipment();
+			equipped[i] = tmp;
+		}
 	}
 
 	string getName(){ return this->name; }
@@ -75,7 +85,7 @@ public:
 	// 	/* WIP: damage calculation */
 	// 	target.take_damage(this, dmg);
 	// }
-	void die(Monster attacker);
+	void die(Monster& attacker);
 	void take_damage(Monster& attacker, uint dmg);
 	void attack(Monster& target);
 
@@ -142,24 +152,56 @@ public:
 		this->level_up();
 	}
 
+	void equip(Equipment gear){
+		if(gear.getSlot() == "Headgear"){ equipped[0] = gear; }
+		else if(gear.getSlot() == "Upper Body"){ equipped[1] = gear; }
+		else if(gear.getSlot() == "Lower Body"){ equipped[2] = gear; }
+		else if(gear.getSlot() == "Shoes"){ equipped[3] = gear; }
+		else if(gear.getSlot() == "Main Hand"){ equipped[4] = gear; }
+		else if(gear.getSlot() == "Sub Hand"){ equipped[5] = gear; }
+		else{}
+	}
+
 
 
 	void printInfo(){
+		int bHP = 0; int batk = 0; int bmatk = 0;
+		int bstr = 0; int bdex = 0; int bint = 0; 
+		int bluk = 0; int bacc = 0; int beva = 0;
+		for(uint i = 0; i < 6;i++){
+			bHP += equipped[i].getHP();
+			batk += equipped[i].getStat(0);
+			bmatk += equipped[i].getStat(1);
+			bstr += equipped[i].getStat(2);
+			bdex += equipped[i].getStat(3);
+			bint += equipped[i].getStat(4);
+			bluk += equipped[i].getStat(5);
+			bacc += equipped[i].getAcc();
+			beva += equipped[i].getEva();
+		}
+
 		cout<<"Party Member Info\n";
 		cout<<"Name:     "<< this->name <<"\n";
 		cout<<"Class:    "<< this->job <<"\n";
 		cout<<"Level:    "<< this->lvl <<"\n";
 		cout<<"EXP:      "<<left<<setw(9)<< this->currEXP << " / " <<setw(9)<< this->neededEXP <<"\n";
-		cout<<"Health:   "<<left<<setw(5)<< this->currHP << " / " <<setw(5)<< this->maxHP <<"\n";
+		cout<<"Health:   "<<left<<setw(5)<< this->currHP + bHP << " / " <<setw(5)<< this->maxHP + bHP <<"\n";
 		cout<<"Main Stats\n";
-		cout<<"     STR: "<< this->stats[0] <<"\n";
-		cout<<"     DEX: "<< this->stats[1] <<"\n";
-		cout<<"     INT: "<< this->stats[2] <<"\n";
-		cout<<"     LUK: "<< this->stats[3] <<"\n";
+		cout<<"     STR: "<< this->stats[0] + bstr <<"\n";
+		cout<<"     DEX: "<< this->stats[1] + bdex <<"\n";
+		cout<<"     INT: "<< this->stats[2] + bint <<"\n";
+		cout<<"     LUK: "<< this->stats[3] + bluk <<"\n";
 		cout<<"     DEF: "<< this->stats[4] <<"\n";
 		cout<<"    MDEF: "<< this->stats[5] <<"\n";
-		cout<<"Accuracy: "<< this->acc <<"\n";
-		cout<<"Evasion:  "<< this->eva <<"\n";
+		cout<<"Accuracy: "<< this->acc + bacc <<"\n";
+		cout<<"Evasion:  "<< this->eva + beva <<"\n";
+		cout<<"Currently Equipped:\n";
+		cout<<"Head Gear:  "<< this->equipped[0].getName() <<"\n";
+		cout<<"Upper Body: "<< this->equipped[1].getName() <<"\n";
+		cout<<"Lower Body: "<< this->equipped[2].getName() <<"\n";
+		cout<<"Shoes:      "<< this->equipped[3].getName() <<"\n";
+		cout<<"Main Hand:  "<< this->equipped[4].getName() <<"\n";
+		cout<<"Sub Hand:   "<< this->equipped[5].getName() <<"\n";
 	}
 };
 
