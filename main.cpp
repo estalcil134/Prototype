@@ -31,10 +31,7 @@ int main(int argc, char const *argv[]){
 	newline();
 	
 	//typeNull.gainEXP(1000);
-	Skill fireball = Skill("Fireball", "Offensive", "Magical", "Normal", "Mana", 5, 100);
-	typeNull.learnSkill(fireball);
-
-	typeNull.useSkill(0, silvally);
+	
 
 	//typeNull.attack(silvally);
 
@@ -85,6 +82,11 @@ int main(int argc, char const *argv[]){
 
 	Battle first = Battle(player, monsters);
 	first.fight();
+	
+	Skill fireball = Skill("Fireball", "Offensive", "Magical", "Normal", "Mana", 5, 100);
+	typeNull.learnSkill(fireball);
+
+	typeNull.useSkill(0, silvally);
 	*/
 	return 0;
 }
