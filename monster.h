@@ -1,3 +1,6 @@
+#ifndef MONSTER_H
+#define MONSTER_H
+
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
@@ -37,7 +40,7 @@ public:
 		type = _type;
 		lvl = 1;
 		currHP = 10; maxHP = 10;
-		acc = 10; eva = 10;
+		acc = 10; eva = 1;
 	}
 
 	string getName(){return this->name; }
@@ -73,7 +76,7 @@ public:
 	// 	target.take_damage(this, dmg);
 	// }
 	void die(PartyMember& slayer);
-	void take_damage(PartyMember& slayer, uint dmg, string dmg_type);
+	int take_damage(PartyMember& slayer, uint dmg, string dmg_type);
 	void attack(PartyMember& target);
 
 	void printInfo(){
@@ -95,7 +98,50 @@ public:
 
 class MonsterParty{
 private:
-
+	vector<Monster> members;
 public:
+	MonsterParty(Monster leader){
+		members.push_back(leader);
+	}
+	/*
+	bool contains(Monster member){
+		for(uint i = 0; i < this->members.size(); i++){
+			if(this->members[i].equals(member)){
+				return true;
+			}
+		}
+		return false;
+	}
+	*/
+	MonsterParty(vector<Monster> new_party){
+		members = new_party;
+	}
 
+	/*
+	bool add(Monster new_member){
+		if(this->contains(new_member)){
+			return false;
+		}
+		else{
+			this->members.push_back(new_member);
+			return true;
+		}
+	}
+	*/
+	uint size(){return members.size(); }
+
+	void printParty(){
+		//prints out an overview of the party members
+		cout<<"Party Members\n";
+	}
+	void printPartyBattle(int member1 = 0, int member2 = -1, int member3 = -1){
+		//prints out the active members in battle
+		string display_names = "";
+		string display_HP = "";
+
+
+		cout<<" \n";
+	}
 };
+
+#endif

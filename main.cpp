@@ -15,36 +15,44 @@ using namespace std;
 void newline(){cout<<"\n";}
 
 int main(int argc, char const *argv[]){
+	srand(time(0));
+
 	
-	PartyMember typeNull = PartyMember("Type Null", "None");
+	PartyMember typeNull = PartyMember("Type Null", "Magician");
 	typeNull.printInfo();
 	newline();
 	//Party poke = Party(typeNull);
 	//cout<<"Party made! Size: "<< poke.size() <<"\n";
 	//typeNull.gainEXP(200);
 	//typeNull.printInfo();
-	/*
+	
 	Monster silvally = Monster("Silvally", "Unburdened Monster");
 	silvally.printInfo();
 	newline();
-	*/
+	
+	//typeNull.gainEXP(1000);
+	Skill fireball = Skill("Fireball", "Offensive", "Magical", "Normal", "Mana", 5, 100);
+	typeNull.learnSkill(fireball);
+
+	typeNull.useSkill(0, silvally);
+
 	//typeNull.attack(silvally);
 
 	//typeNull.printInfo();
+	/*
+	Equipment head  = Equipment("Crown of Poseidon", "Headgear", "None", 20, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+	Equipment ubody = Equipment("Adamant Platemail", "Upper Body", "Warrior", 13, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+	Equipment lbody = Equipment("UNIQLO Jeans", "Lower Body", "None", 25, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+	Equipment shoes = Equipment("Hermes Treads", "Shoes", "Thief", 64, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+	Equipment mweap = Equipment("Excalibur", "Main Hand", "Warrior", 99, 8, 7, 6, 5, 4, 3, 2, 1, 0);
+	Equipment sweap = Equipment("Bishop's Cross", "Sub Hand", "Warrior", 66, 8, 7, 6, 5, 4, 3, 2, 1, 0);
 	
-	Equipment head  = Equipment("Crown of Poseidon", "Headgear", 20, 8, 7, 6, 5, 4, 3, 2, 1, 0);
-	Equipment ubody = Equipment("Adamant Platemail", "Upper Body", 13, 8, 7, 6, 5, 4, 3, 2, 1, 0);
-	Equipment lbody = Equipment("UNIQLO Jeans", "Lower Body", 25, 8, 7, 6, 5, 4, 3, 2, 1, 0);
-	Equipment shoes = Equipment("Hermes Treads", "Shoes", 64, 8, 7, 6, 5, 4, 3, 2, 1, 0);
-	Equipment mweap = Equipment("Excalibur", "Main Hand", 99, 8, 7, 6, 5, 4, 3, 2, 1, 0);
-	Equipment sweap = Equipment("Bishop's Cross", "Sub Hand", 66, 8, 7, 6, 5, 4, 3, 2, 1, 0);
-	
-	Equipment start_head  = Equipment("Ragged Hood", "Headgear", 1, 0, 0, 0, 0, 0, 0, 0, 1, 0);
-	Equipment start_ubody = Equipment("Tattered Shirt", "Upper Body", 1, 5, 0, 0, 0, 0, 0, 1, 0, 0);
-	Equipment start_lbody = Equipment("Breezy Old Leggings", "Lower Body", 1, 5, 0, 0, 0, 1, 0, 1, 0, 0);
-	Equipment start_shoes = Equipment("Old Sandals", "Shoes", 1, 0, 0, 0, 0, 1, 0, 0, 2, 2);
-	Equipment start_mweap = Equipment("Toy Sword", "Main Hand", 1, 0, 4, 0, 1, 0, 0, 0, 0, 0);
-	Equipment start_sweap = Equipment("Pot Lid", "Sub Hand", 1, 0, 0, 0, 0, 0, 0, 0, 0, 3);
+	Equipment start_head  = Equipment("Ragged Hood", "Headgear", "None", 1, 0, 0, 0, 0, 0, 0, 0, 1, 0);
+	Equipment start_ubody = Equipment("Tattered Shirt", "Upper Body", "None", 1, 5, 0, 0, 0, 0, 0, 1, 0, 0);
+	Equipment start_lbody = Equipment("Breezy Old Leggings", "Lower Body", "None", 1, 5, 0, 0, 0, 1, 0, 1, 0, 0);
+	Equipment start_shoes = Equipment("Old Sandals", "Shoes", "None", 1, 0, 0, 0, 0, 1, 0, 0, 2, 2);
+	Equipment start_mweap = Equipment("Toy Sword", "Main Hand", "Warrior", 1, 0, 4, 0, 1, 0, 0, 0, 0, 0);
+	Equipment start_sweap = Equipment("Pot Lid", "Sub Hand", "None", 1, 0, 0, 0, 0, 0, 0, 0, 0, 3);
 
 	vector<Equipment> inventory;
 	inventory.push_back(head); inventory.push_back(ubody);
@@ -70,12 +78,13 @@ int main(int argc, char const *argv[]){
 	}
 	newline();
 	typeNull.printInfo(); newline();
-	
+	*/
 	/*
-	inventory.push_back(hat);
-	inventory.push_back(weap);
-	cout<< inventory[0].getName() <<"\n> "<< inventory[0].getSlot() <<"\n";
-	cout<< inventory[1].getName() <<"\n> "<< inventory[1].getSlot() <<"\n";
+	Party player = Party(typeNull);
+	MonsterParty monsters = MonsterParty(silvally);
+
+	Battle first = Battle(player, monsters);
+	first.fight();
 	*/
 	return 0;
 }
